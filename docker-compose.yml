@@ -18,7 +18,7 @@ services:
       image: phpmyadmin/phpmyadmin
       restart: always
       ports:
-       - '8080:80'
+       - '9080:80'
       environment:
         PMA_HOST: db
 
@@ -27,7 +27,7 @@ services:
      depends_on:
        - db
      ports:
-       - "3000:80"
+       - "3000:8000"
      volumes:
        - .:/var/www/html
      links:
