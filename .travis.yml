@@ -1,4 +1,18 @@
-language: ruby
-rvm:
- - 2.2
- - jruby
+os:
+  - linux
+language: php
+dist: trusty
+php:
+  - '7.4'
+services:
+  - docker
+jobs:
+  include:
+    - stage: "Tests"                
+      name: "Unit Test PHP"  
+      script: 
+      - travis_retry composer self-update
+      - travis_retry composer install --prefer-source --no-interaction
+      - cp .env.example .env
+      - php artisan key:generate
+      - php artisan test
