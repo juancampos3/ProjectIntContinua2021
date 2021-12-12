@@ -6,6 +6,9 @@ php:
   - '8.0'
 services:
   - docker
+  - mysql
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS laravel;'
 jobs:
   include:
     - stage: "Tests"                
@@ -16,4 +19,5 @@ jobs:
       - travis_retry composer install --prefer-source --no-interaction
       - cp .env.example .env
       - php artisan key:generate
+      - php artisan migrate
       - php artisan test
