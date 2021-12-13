@@ -9,6 +9,7 @@ services:
   - mysql
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS laravel;'
+  - cd app
 before_script:
   - composer self-update --stable
 jobs:
@@ -16,7 +17,6 @@ jobs:
     - stage: "Tests"                
       name: "Unit Test PHP"  
       script: 
-      - cd app
       - cp .env.example .env
       - php artisan key:generate
       - php artisan migrate
